@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Task Manager Application</string>
+
+
+    <string name="task_saved_success">Tarea guardada correctamente</string>
+    <string name="error_task_save">Error al guardar la tarea</string>
+    <string name="titulo_tarea">Título de la tarea</string>
+    <string name="descripcion_tarea">Descripcion de la tarea</string>
+
+    <string name="save">Guardar</string>
+    <string name="add_task">Agregar Tarea</string>
+
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+
+    <string name="actualizar_tarea">Actualizar Tarea</string>
+    <string name="titulo_obligatorio">El título es obligatorio</string>
+    <string name="tarea_actualizada">Tarea actualizada</string>
+
+    <string name="tarea_eliminada">Tarea eliminada</string>
+
+
+</resources>
