@@ -20,5 +20,9 @@
     <string name="tarea_eliminada">Tarea eliminada</string>
     <string name="descipcion_obligatorio">La descipcion es obligatorio</string>
 
+    <string name="cancelar_eliminacion">Cancelar</string>
+    <string name="confirmar_eliminacion">¿Estás seguro de que deseas eliminar esta tarea?</string>
+    <string name="eliminar_tarea_titulo_caja">Eliminar Tarea</string>
+
 
 </resources>

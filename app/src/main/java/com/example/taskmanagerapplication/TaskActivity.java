@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,9 +44,8 @@ public class TaskActivity extends AppCompatActivity {
 
             @Override
             public void onDelete(Task task) {
-                taskController.deleteTask(task);
-                loadTasks(); // refrescamos la vista
-                Toast.makeText(TaskActivity.this, R.string.tarea_eliminada, Toast.LENGTH_SHORT).show();
+                // llama al metodo para confirmar que quiere eliminar esa tarea (porque no tenia la confirmacion y pues eliminaba sin preguntar)
+                confirmationDelete(task);
             }
         });
 
@@ -86,4 +86,23 @@ public class TaskActivity extends AppCompatActivity {
         intent.putExtra("taskCompleted", task.isCompleted);
         startActivity(intent);
     }
+
+
+    // metodo para confirmar la eliminacion de la tarea
+    private void confirmationDelete(Task task) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.eliminar_tarea_titulo_caja)
+                .setMessage(R.string.confirmar_eliminacion)
+                .setPositiveButton(R.string.eliminar, (dialog, which) -> {
+                    // aqui eliminamos la tarea ya que confirmo la eliminacion
+                    taskController.deleteTask(task);
+                    loadTasks(); // Refrescamos la lista
+                    Toast.makeText(TaskActivity.this, R.string.tarea_eliminada, Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton(R.string.cancelar_eliminacion, null) // regresa y no elimina
+                .show();
+    }
+
+
+
 }
