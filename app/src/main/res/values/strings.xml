@@ -18,6 +18,7 @@
     <string name="tarea_actualizada">Tarea actualizada</string>
 
     <string name="tarea_eliminada">Tarea eliminada</string>
+    <string name="descipcion_obligatorio">La descipcion es obligatorio</string>
 
 
 </resources>

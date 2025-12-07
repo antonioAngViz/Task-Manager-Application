@@ -73,10 +73,10 @@ public class AddTaskActivity extends AppCompatActivity {
                 etTaskTitle.setError(getString(R.string.titulo_obligatorio));
                 return;
             }
-            /*if(description.isEmpty()) {
-                etTaskDescription.setError("La descipcion es obligatorio");
+            if(description.isEmpty()) {
+                etTaskDescription.setError(getString(R.string.descipcion_obligatorio));
                 return;
-            }*/
+            }
 
             saveTask(title, description);
         });
