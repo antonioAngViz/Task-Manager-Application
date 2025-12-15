@@ -2,6 +2,7 @@ package com.example.taskmanagerapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagerapplication.controller.TaskController;
 import com.example.taskmanagerapplication.model.Task;
+import com.example.taskmanagerapplication.view.HistoryActivity;
 import com.example.taskmanagerapplication.view.TaskAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,12 +30,11 @@ public class TaskActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_task);
 
-        // contolador
+        // controlador
         taskController = new TaskController(this);
 
         RecyclerView recyclerViewTasks = findViewById(R.id.rvTasks);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
-
 
         taskAdapter = new TaskAdapter(new TaskAdapter.OnTaskActionListener() {
             @Override
@@ -44,17 +45,25 @@ public class TaskActivity extends AppCompatActivity {
 
             @Override
             public void onDelete(Task task) {
-                // llama al metodo para confirmar que quiere eliminar esa tarea (porque no tenia la confirmacion y pues eliminaba sin preguntar)
+                // llama al metodo para confirmar que quiere eliminar
                 confirmationDelete(task);
             }
         });
 
         recyclerViewTasks.setAdapter(taskAdapter);
 
-        // el noton que nos manda a la pantalla de agregar tarea
+        // este boton es pa agregar la tarea
         FloatingActionButton fabAddTask = findViewById(R.id.fabAddTask);
         fabAddTask.setOnClickListener(view -> {
             showAddTaskActivity();
+        });
+
+        // este boton es para ver historiak
+        Button btnHistory = findViewById(R.id.btnViewHistory);
+        btnHistory.setOnClickListener(view -> {
+            // ir a la actividad del historial
+            Intent intent = new Intent(TaskActivity.this, HistoryActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -87,7 +96,6 @@ public class TaskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     // metodo para confirmar la eliminacion de la tarea
     private void confirmationDelete(Task task) {
         new AlertDialog.Builder(this)
@@ -96,13 +104,10 @@ public class TaskActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.eliminar, (dialog, which) -> {
                     // aqui eliminamos la tarea ya que confirmo la eliminacion
                     taskController.deleteTask(task);
-                    loadTasks(); // Refrescamos la lista
+                    loadTasks(); // se refresca la lista
                     Toast.makeText(TaskActivity.this, R.string.tarea_eliminada, Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton(R.string.cancelar_eliminacion, null) // regresa y no elimina
                 .show();
     }
-
-
-
 }
